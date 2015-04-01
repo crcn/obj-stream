@@ -35,4 +35,22 @@ describe(__filename + "#", function() {
     s1.write("a");
     expect(s1._writer._flowing).to.be(false);
   });
+
+  it("waits for all pipes to resume before emitting data", function() {
+    var s1 = stream.stream();
+    var s2 = stream.stream();
+    var s3 = stream.stream();
+
+    s1.pipe(s2);
+    s1.pipe(s3);
+
+    s3.pause();
+    s2.pause();
+    s1.write("a");
+    expect(s1._writer._flowing).to.be(false);
+    s3.resume();
+    expect(s1._writer._flowing).to.be(false);
+    s2.resume();
+    expect(s1._writer._flowing).to.be(true);
+  });
 });

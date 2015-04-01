@@ -44,7 +44,7 @@ describe(__filename + "#", function() {
   it("emits drain wen the stream is resumed", function(next) {
     var writable = stream.writable();
     writable.reader.pause();
-    writable.once("drain", next);
+    writable.reader.once("drain", next);
     writable.reader.resume();
   });
 
