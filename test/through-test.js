@@ -43,4 +43,5 @@ describe(__filename + "#", function() {
     s1.write("ab");
     expect(items.length).to.be(2);
   });
+
 });
