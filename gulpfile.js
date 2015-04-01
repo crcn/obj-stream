@@ -28,7 +28,7 @@ var mochaOptions = {
   bail     : options.bail     !== 'false',
   reporter : options.reporter || 'dot',
   grep     : options.grep   || options.only,
-  timeout  : options.timeout || 100
+  timeout  : options.timeout || 500
 }
 
 /**
@@ -53,7 +53,7 @@ gulp.task("test-coverage", function (complete) {
 
 /**
  */
- 
+
 gulp.task("test-coveralls", ["test-coverage"], function () {
   return gulp.
   src("coverage/**/lcov.info").
@@ -73,13 +73,13 @@ gulp.task("bundle", function() {
 
 /**
  */
- 
+
 gulp.task("minify", ["bundle"], function() {
   return gulp.
   src("./dist/crudlet.js").
   pipe(uglify()).
   pipe(rename(function(path) {
-      path.basename += ".min"; 
+      path.basename += ".min";
   })).
   pipe(gulp.dest('./dist'));
 });
@@ -138,7 +138,7 @@ gulp.task("jshint", function() {
 /**
  */
 
-gulp.task("test", function (complete) { 
+gulp.task("test", function (complete) {
   gulp.
   src(paths.testFiles, { read: false }).
   pipe(plumber()).

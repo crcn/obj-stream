@@ -1,6 +1,7 @@
 var expect = require("expect.js");
 var stream = require("..");
 var sinon  = require("sinon");
+var _      = require("highland");
 
 describe(__filename + "#", function() {
 
@@ -70,6 +71,29 @@ describe(__filename + "#", function() {
   it("can pass data into end", function(next) {
     var writable = stream.writable();
     writable.reader.once("data", function() { next(); });
+    writable.end("a");
+  });
+
+  it("only ends when flowing", function() {
+    var writable = stream.writable();
+    writable.reader.pause();
+    var i = 0;
+    writable.reader.on("end", function() { i++; });
+    writable.write("a");
+    writable.end();
+    expect(i).to.be(0);
+    writable.reader.resume();
+    expect(i).to.be(1);
+  });
+
+  it("can collect items", function(next) {
+    var writable = stream.writable();
+    writable.reader.pipe(_.pipeline(_.collect)).on("data", function(items) {
+      expect(items.length).to.be(3);
+      next();
+    });
+    writable.write("a");
+    writable.write("a");
     writable.end("a");
   });
 });
