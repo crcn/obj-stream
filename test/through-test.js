@@ -32,4 +32,15 @@ describe(__filename + "#", function() {
     }, 10);
   });
 
+  it("can write a stream of operations", function() {
+    var items = [];
+    var s1 = stream.through(function(obj, next) {
+      this.push(obj);
+      this.push(obj);
+      next();
+    }).on("data", items.push.bind(items));
+
+    s1.write("ab");
+    expect(items.length).to.be(2);
+  });
 });
