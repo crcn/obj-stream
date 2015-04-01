@@ -3,5 +3,4 @@ var stream = require("..");
 
 describe(__filename + "#", function() {
 
-  
 });
