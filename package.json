@@ -1,7 +1,7 @@
 {
   "name": "obj-stream",
-  "version": "0.0.3",
-  "description": "local storage adapter (offline-mode) for crudlet",
+  "version": "0.0.4",
+  "description": "simple object streams",
   "main": "./lib/index.js",
   "scripts": {
     "test": "gulp lint test-coveralls"
@@ -38,7 +38,6 @@
     "yargs": "^3.6.0"
   },
   "dependencies": {
-    "fast-event-emitter": "0.0.2",
     "protoclass": "0.0.6"
   }
 }

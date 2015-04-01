@@ -63,8 +63,8 @@ describe(__filename + "#", function() {
 
   it("emits end when end is called", function(next) {
     var writable = stream.writable();
-    writable.once("end", next);
-    writable.end()
+    writable.reader.once("end", next);
+    writable.end();
   });
 
   it("can pass data into end", function(next) {
