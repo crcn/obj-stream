@@ -134,12 +134,21 @@ describe(__filename + "#", function() {
     expect(readable._events.end).to.be(void 0);
   });
 
+  it("passes the error down stream", function(next) {
+    var readable = stream.readable();
+    readable.pipe(_.pipeline()).on("error", function(err) {
+      expect(err.message).to.be("err");
+      next();
+    });
+    readable.emit("error", new Error("err"));
+  });
+
   it("cleans up the pipe when the src emits an error", function() {
     var readable = stream.readable();
     var dest = _();
-    readable.pipe(dest);
+    readable.pipe(dest).on("error", function() { });
     expect(readable._events.end).not.to.be(void 0);
-    readable.emit("error");
+    readable.emit("error", new Error("e"));
     expect(readable._events.end).to.be(void 0);
   });
 
