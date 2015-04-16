@@ -96,4 +96,15 @@ describe(__filename + "#", function() {
     writable.write("a");
     writable.end("a");
   });
+
+  it("can be piped to", function(next) {
+    var a = stream.writable();
+    var b = stream.writable();
+    a.reader.pipe(b).reader.on("data", function(data) {
+      expect(data).to.be(1);
+      next();
+    });
+
+    a.write(1);
+  });
 });

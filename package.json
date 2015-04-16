@@ -1,6 +1,6 @@
 {
   "name": "obj-stream",
-  "version": "0.0.14",
+  "version": "0.0.16",
   "description": "simple object streams",
   "main": "./lib/index.js",
   "scripts": {
