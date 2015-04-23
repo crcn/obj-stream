@@ -63,4 +63,16 @@ describe(__filename + "#", function() {
     s1.end(3);
   });
 
+  it("passes errors through", function(next) {
+    var s1 = stream.stream();
+    var s2 = s1.pipe(stream.through(function(data, next) {
+      next();
+    }));
+
+    s2.on("error", function() {
+      next();
+    });
+
+    s1.emit("error");
+  });
 });
