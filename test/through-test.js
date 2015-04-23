@@ -108,7 +108,5 @@ describe(__filename + "#", function() {
       expect(buffer.length).to.be(3);
       next();
     });
-
-
   });
 });
