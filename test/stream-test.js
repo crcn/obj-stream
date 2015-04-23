@@ -53,4 +53,5 @@ describe(__filename + "#", function() {
     s2.resume();
     expect(s1._writer._flowing).to.be(true);
   });
+  
 });

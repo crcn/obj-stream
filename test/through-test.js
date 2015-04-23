@@ -44,4 +44,23 @@ describe(__filename + "#", function() {
     expect(items.length).to.be(2);
   });
 
+
+  it("can buffer content and pass downstream", function(next) {
+    var buffer = [];
+    var s1 = stream.stream();
+    s1.pipe(stream.through(function(data, next) {
+      buffer.push(data);
+      next();
+    }, function() {
+      this.push(buffer);
+    })).on("data", function(data) {
+      expect(data.length).to.be(3);
+      next();
+    });
+
+    s1.write(1);
+    s1.write(2);
+    s1.end(3);
+  });
+
 });
