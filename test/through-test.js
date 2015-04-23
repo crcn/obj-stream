@@ -103,12 +103,12 @@ describe(__filename + "#", function() {
     }));
 
 
+    s.on("data", function() {});
     s.on("end", function() {
       expect(buffer.length).to.be(3);
       next();
     });
 
-    s.on("data", function() {});
 
   });
 });
