@@ -45,7 +45,6 @@ describe(__filename + "#", function() {
     expect(items.length).to.be(2);
   });
 
-
   it("can buffer content and pass downstream", function(next) {
     var buffer = [];
     var s1 = stream.stream();
@@ -101,7 +100,6 @@ describe(__filename + "#", function() {
     }, function() {
       this.push(buffer);
     }));
-
 
     s.on("data", function() {});
     s.on("end", function() {
